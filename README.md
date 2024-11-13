@@ -1,4 +1,4 @@
-![readme cover](media/LLM Model from Hugging Face.jpg)
+![readme cover](media/cover.jpg)
 
 # Hugging Face LLM Models Deployment on Azure Kubernetes Service (AKS)
 
