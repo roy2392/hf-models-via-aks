@@ -130,7 +130,7 @@ kubectl get service llm2vec-service
 
 14. Question the model based on the EXTERNAL-IP showed up in the previous step
 ```bash
-curl -X POST http://51.142.217.203/encode \
+curl -X POST http://<external-ip>/encode \
   -H "Content-Type: application/json" \
   -d '{
     "texts": ["This is a test sentence"],
