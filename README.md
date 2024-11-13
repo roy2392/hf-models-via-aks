@@ -81,7 +81,7 @@ kubectl get services
 kubectl get service llm2vec-service
 ```
 
-13.question the model based on the EXTERNAL-IP showed up in the previous step
+13. Question the model based on the EXTERNAL-IP showed up in the previous step
 ```bash
 curl -X POST http://51.142.217.203/encode \
   -H "Content-Type: application/json" \
@@ -90,3 +90,6 @@ curl -X POST http://51.142.217.203/encode \
     "instruction": "Represent the meaning of this text"
   }'
 ```
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
