@@ -137,7 +137,9 @@ curl -X POST http://51.142.217.203/encode \
     "instruction": "Represent the meaning of this text"
   }'
 ```
-15. if you want to switch to a different model, you can change the model name in the deployment.yaml file
+15. if you want to switch to a different model, you can change the model name via  the app.py file:
+
+![change model name](media/model name.png)
 
 
 ## License
