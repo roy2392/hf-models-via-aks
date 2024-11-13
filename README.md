@@ -55,42 +55,59 @@ kubectl get nodes
 
 ![deployment resource screenshot](media/resource-screenshot.png)
 
-6. create a new ACR (Azure Container Registry) using the following command
+* create Create resource group (skip this step if you already have a resource group):
+```bash
+az group create --name llm2vec-rg --location uksouth
+```
+* Create ACR:
 ```bash
 az acr create --resource-group llm2vec-rg --name your-registry-name --sku Basic
 ```
-7. change the ACR name in the deployment.yaml file
+* Login to ACR:
+```bash
+az acr login --name your-registry-name
+```
+* Build the image:
+```bash
+  docker build -t your-registry-name.azurecr.io/llm2vec:latest .
+```
+* Push to ACR:
+```bash
+docker push your-registry-name.azurecr.io/llm2vec:latest
+```
+
+6. change the ACR name in the deployment.yaml file
 
 ![image name on deployment file](media/change-image-name.png)
 
-8. Build the docker image locally (make sure you have Docker installed)
+7. Build the docker image locally (make sure you have Docker installed)
 ```bash
 az acr build --registry your-registry-name --image llm2vec:latest .
 ```
-9. Deploy to AKS
+8. Deploy to AKS
 ```bash
 kubectl apply -f deployment.yaml
 ```
-10. Check pod status (copy the pode Name)
+9. Check pod status (copy the pode Name)
 
 ![copy pods name](media/pod-name.png)
 ```bash
 kubectl get pods
 ```
-11. make sure to create a secret for the Hugging Face token
+10. make sure to create a secret for the Hugging Face token
 ```bash
 kubectl create secret generic huggingface-token --from-literal=token=YOUR_HUGGING_FACE_TOKEN
 ```
-12. Check logs (paste the pod name)
+11. Check logs (paste the pod name)
 
 ```bash
 kubectl logs <pod-name>
 ```
-13. List all services
+12. List all services
 ```bash
 kubectl get services
 ```
-14. Get service external IP (copy the EXTERNAL-IP):
+13. Get service external IP (copy the EXTERNAL-IP):
 ```bash
 kubectl get service llm2vec-service
 ```
