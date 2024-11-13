@@ -45,13 +45,29 @@ az login
 ```bash
 az aks get-credentials --resource-group llm2vec-rg --name llm2vec-cluster
 ```
+* to create a new cluster, you can use the following command:
+```bash
+az aks create \
+    --resource-group llm2vec-rg \
+    --name llm2vec-cluster \
+    --node-count 2 \
+    --node-vm-size Standard_NC4as_T4_v3 \  # This is where the VM size is specified
+    --enable-managed-identity \
+    --generate-ssh-keys \
+    --attach-acr llm2vecregistry
+```
+* to see the spec of a VM you can visit the [Azure VM sizes](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes-gpu)
 
 4. Vertify the connection to the cluster
 ```bash
 kubectl get nodes
 ```
 
-5. you need to make sure the cluster resources are enough to deploy the model, you can check the available resources using the following command
+5. you need to make sure the cluster resources are enough to deploy the model, you can check the available resources (VM sizes available in the region) using the following command:
+```bash
+az vm list-sizes --location uksouth --output table | grep "NC"
+```
+* you can change the VM size in the node pool configuration in the deployment.yaml file
 
 ![deployment resource screenshot](media/resource-screenshot.png)
 
