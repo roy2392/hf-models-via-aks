@@ -4,4 +4,4 @@ transformers
 torch
 llm2vec
 peft
-
+pydantic

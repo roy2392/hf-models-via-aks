@@ -2,7 +2,7 @@ import requests
 import json
 
 # Replace this with your actual external IP from the kubectl command
-EXTERNAL_IP = " 51.142.217.203"  # Replace with your IP
+EXTERNAL_IP = "51.142.217.203"  # Replace with your IP
 
 def test_model():
     # Test data

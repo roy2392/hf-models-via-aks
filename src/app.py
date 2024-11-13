@@ -6,16 +6,18 @@ from peft import PeftModel
 from huggingface_hub import login
 import os
 import logging
+from config import settings
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+model_name="McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp"
 app = FastAPI()
 
 # Initialize models and tokenizer
 try:
-    # Ensure HF_TOKEN is available
+    # Ensure HF_TOKEN is available and you defined a model
     hf_token = os.environ.get("HF_TOKEN")
     if not hf_token:
         raise ValueError("HF_TOKEN environment variable is not set")
@@ -26,14 +28,14 @@ try:
     
     # Initialize tokenizer
     tokenizer = AutoTokenizer.from_pretrained(
-            "McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp",
+            model_name,
             token=hf_token
     )
     logger.info("Tokenizer initialized successfully")
     
     # Load configuration
     config = AutoConfig.from_pretrained(
-            "McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp",
+            model_name,
             trust_remote_code=True,
             token=hf_token
     )
@@ -41,7 +43,7 @@ try:
     
     # Initialize model
     model = AutoModel.from_pretrained(
-            "McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp",
+            model_name,
             token=hf_token,
             trust_remote_code=True,
             config=config,
@@ -53,7 +55,7 @@ try:
     # Load PEFT model
     model = PeftModel.from_pretrained(
             model,
-            "McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp",
+            model_name,
             token=hf_token
     )
     logger.info("PEFT model loaded successfully")

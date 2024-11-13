@@ -105,7 +105,7 @@ curl -X POST http://51.142.217.203/encode \
   }'
 ```
 15. if you want to switch to a different model, you can change the model name in the deployment.yaml file
-```yaml
+
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
