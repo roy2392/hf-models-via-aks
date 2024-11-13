@@ -139,7 +139,7 @@ curl -X POST http://51.142.217.203/encode \
 ```
 15. if you want to switch to a different model, you can change the model name via  the app.py file:
 
-![change model name](media/model name.png)
+![change model name](media/model-name.png)
 
 
 ## License
