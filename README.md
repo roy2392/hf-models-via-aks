@@ -1,3 +1,5 @@
+![readme cover](media/LLM Model from Hugging Face.jpg)
+
 # Hugging Face LLM Models Deployment on Azure Kubernetes Service (AKS)
 
 ## Introduction
@@ -6,6 +8,8 @@ the code in this repo uses [LLM2Vec](https://huggingface.co/McGill-NLP/LLM2Vec-M
 
 ## Motivation
 This project is aims to help data scientist deploy a model of their choice fast on an existing AKS cluster of Pwc | Next Azure Lab environment.
+
+![diagram](media/diagram-aks.jpg)
 
 ## Architecture
 The architecture of the project is as follows:
