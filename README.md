@@ -55,35 +55,43 @@ kubectl get nodes
 ```bash
 az acr create --resource-group llm2vec-rg --name your-registry-name --sku Basic
 ```
-7. Build the docker image locally (make sure you have Docker installed)
+7. change the ACR name in the deployment.yaml file
+
+![image name on deployment file](media/change-image-name.png)
+
+8. Build the docker image locally (make sure you have Docker installed)
 ```bash
 az acr build --registry your-registry-name --image llm2vec:latest .
 ```
-8. Deploy to AKS
+9. Deploy to AKS
 ```bash
 kubectl apply -f deployment.yaml
 ```
-9. Check pod status (copy the pode Name)
+10. Check pod status (copy the pode Name)
 
 ![copy pods name](media/pod-name.png)
 ```bash
 kubectl get pods
 ```
-10. Check logs (paste the pod name)
+11. make sure to create a secret for the Hugging Face token
+```bash
+kubectl create secret generic huggingface-token --from-literal=token=YOUR_HUGGING_FACE_TOKEN
+```
+12. Check logs (paste the pod name)
 
 ```bash
 kubectl logs <pod-name>
 ```
-11. List all services
+13. List all services
 ```bash
 kubectl get services
 ```
-12. Get service external IP (copy the EXTERNAL-IP):
+14. Get service external IP (copy the EXTERNAL-IP):
 ```bash
 kubectl get service llm2vec-service
 ```
 
-13. Question the model based on the EXTERNAL-IP showed up in the previous step
+14. Question the model based on the EXTERNAL-IP showed up in the previous step
 ```bash
 curl -X POST http://51.142.217.203/encode \
   -H "Content-Type: application/json" \
@@ -92,6 +100,8 @@ curl -X POST http://51.142.217.203/encode \
     "instruction": "Represent the meaning of this text"
   }'
 ```
+15. if you want to switch to a different model, you can change the model name in the deployment.yaml file
+```yaml
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
