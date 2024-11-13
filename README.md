@@ -45,7 +45,7 @@ az login
 ```bash
 az aks get-credentials --resource-group llm2vec-rg --name llm2vec-cluster
 ```
-* to create a new cluster, you can use the following command:
+* to create a new cluster, you can use the following command (only create new one if the existing one is not enough for the model requirements):
 ```bash
 az aks create \
     --resource-group llm2vec-rg \
