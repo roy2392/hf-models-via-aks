@@ -48,6 +48,7 @@ kubectl get nodes
 ```
 
 5. you need to make sure the cluster resources are enough to deploy the model, you can check the available resources using the following command
+
 ![deployment resource screenshot](media/resource-screenshot.png)
 
 6. create a new ACR (Azure Container Registry) using the following command
@@ -63,6 +64,7 @@ az acr build --registry your-registry-name --image llm2vec:latest .
 kubectl apply -f deployment.yaml
 ```
 9. Check pod status (copy the pode Name)
+
 ![copy pods name](media/pod-name.png)
 ```bash
 kubectl get pods
