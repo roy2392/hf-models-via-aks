@@ -37,4 +37,56 @@ git clone git@github.com:roy2392/hf-models-via-aks.git
 ```bash
 az login
 ```
+3. Get credentials for AKS cluster
+```bash
+az aks get-credentials --resource-group llm2vec-rg --name llm2vec-cluster
+```
 
+4. Vertify the connection to the cluster
+```bash
+kubectl get nodes
+```
+
+5. you need to make sure the cluster resources are enough to deploy the model, you can check the available resources using the following command
+![deployment resource screenshot](media/resource-screenshot.png)
+
+6. create a new ACR (Azure Container Registry) using the following command
+```bash
+az acr create --resource-group llm2vec-rg --name your-registry-name --sku Basic
+```
+7. Build the docker image locally (make sure you have Docker installed)
+```bash
+az acr build --registry your-registry-name --image llm2vec:latest .
+```
+8. Deploy to AKS
+```bash
+kubectl apply -f deployment.yaml
+```
+9. Check pod status (copy the pode Name)
+![copy pods name](media/pod-name.png)
+```bash
+kubectl get pods
+```
+10. Check logs (paste the pod name)
+
+```bash
+kubectl logs <pod-name>
+```
+11. List all services
+```bash
+kubectl get services
+```
+12. Get service external IP (copy the EXTERNAL-IP):
+```bash
+kubectl get service llm2vec-service
+```
+
+13.question the model based on the EXTERNAL-IP showed up in the previous step
+```bash
+curl -X POST http://51.142.217.203/encode \
+  -H "Content-Type: application/json" \
+  -d '{
+    "texts": ["This is a test sentence"],
+    "instruction": "Represent the meaning of this text"
+  }'
+```
